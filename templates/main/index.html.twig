@@ -9,12 +9,14 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/bernard-ng/dev/projects/COMMUNITY/workshop/sf-1/webapp/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/bernard-ng/dev/projects/COMMUNITY/workshop/sf-1/webapp/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+    {% for post in posts %}
+        <article>
+            <a href="{{ path('show', {id: post.id}) }}"><h1>{{ post.title | capitalize }}</h1></a>
+            <p>{{ post.summary }}</p>
+            <time>{{ post.publishedAt | date('d M Y') | lower }}</time>
+            <time>{{ date(post.publishedAt).format('d M Y')  }}</time>
+        </article> <br>
+    {% endfor %}
 </div>
 {% endblock %}
+
