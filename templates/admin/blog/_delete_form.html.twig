@@ -1,0 +1,7 @@
+<form action="{{ url('admin_blog_edit', {id: post.id}) }}" method="post" data-confirmation="true" id="delete-form">
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+    <button type="submit" class="btn btn-block btn-danger">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Delete
+    </button>
+</form>

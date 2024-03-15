@@ -44,6 +44,7 @@ class Post
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->published_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
