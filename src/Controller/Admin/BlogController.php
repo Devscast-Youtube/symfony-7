@@ -75,4 +75,19 @@ final class BlogController extends AbstractController
             'post' => $post
         ]);
     }
+
+
+    #[Route('/{id}', name: 'delete', methods: ['DELETE'])]
+    public function delete(Post $post, Request $request, EntityManagerInterface $em): Response
+    {
+        /** @var string|null $token */
+        $token = $request->getPayload()->get('token');
+
+        if ($this->isCsrfTokenValid('delete', $token)) {
+            $em->remove($post);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('admin_blog_index', status: Response::HTTP_SEE_OTHER);
+    }
 }
