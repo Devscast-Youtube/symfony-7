@@ -13,15 +13,22 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('summary')
-            ->add('content')
+            ->add('title', TextType::class, [
+                'required' => false
+            ])
+            ->add('summary', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('content', TextareaType::class, [
+                'required' => false
+            ])
         ;
 
         $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
