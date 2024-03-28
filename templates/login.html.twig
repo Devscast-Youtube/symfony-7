@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="well">
+                <form action="" method="post">
+                    <fieldset>
+                        <legend><i class="fa fa-lock" aria-hidden="true"></i>Login</legend>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" />
+                        </div>
+
+                        <div class="form-group form-group-password">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="_password" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" name="_remember_me" checked/>
+                                Keep me logged in
+                            </label>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}
+
+{% endblock %}
