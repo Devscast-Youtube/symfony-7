@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Security\Voter\PostVoter;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Requirement\Requirement;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/blog', name: 'admin_blog_')]
@@ -48,6 +50,7 @@ final class BlogController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'edit', methods: ['GET', 'POST'])]
+    #[IsGranted(PostVoter::MUTATE, 'post')]
     public function edit(Post $post, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(PostType::class, $post);
@@ -78,6 +81,7 @@ final class BlogController extends AbstractController
 
 
     #[Route('/{id}', name: 'delete', methods: ['DELETE'])]
+    #[IsGranted(PostVoter::MUTATE, 'post')]
     public function delete(Post $post, Request $request, EntityManagerInterface $em): Response
     {
         /** @var string|null $token */

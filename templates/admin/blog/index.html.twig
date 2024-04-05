@@ -8,6 +8,7 @@
         <tr>
             <th scope="col">Title</th>
             <th scope="col"><i class="fa fa-calendar" aria-hidden="true"></i> Published</th>
+            <th scope="col"> Author </th>
             <th scope="col" class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i> Action</th>
         </tr>
         </thead>
@@ -16,15 +17,18 @@
             <tr>
                 <td>{{ post.title }}</td>
                 <td>{{ post.publishedAt| date('d/m/y H:i') }}</td>
+                <td>{{ post.author.username }}</td>
                 <td class="text-right">
                     <div class="item-actions">
                         <a href="{{ path('admin_blog_show', {id: post.id}) }}" class="btn btn-sm btn-secondary">
                             <i class="fa fa-eye" aria-hidden="true"></i> Show
                         </a>
 
-                        <a href="{{ path('admin_blog_edit', {id: post.id}) }}" class="btn btn-sm btn-primary">
-                            <i class="fa fa-edit" aria-hidden="true"></i> Edit
-                        </a>
+                        {% if is_granted('POST_MUTATE', post) %}
+                            <a href="{{ path('admin_blog_edit', {id: post.id}) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i> Edit
+                            </a>
+                        {% endif %}
                     </div>
                 </td>
             </tr>

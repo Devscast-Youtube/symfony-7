@@ -16,15 +16,17 @@
 {% endblock %}
 
 {% block sidebar %}
-    <div class="section">
-        <a href="{{ path('admin_blog_edit', {id: post.id}) }}" class="btn btn-lg btn-block btn-success">
-            <i class="fa fa-edit" aria-hidden="true"></i> Edit
-        </a>
-    </div>
+    {% if is_granted('POST_MUTATE', post) %}
+        <div class="section">
+            <a href="{{ path('admin_blog_edit', {id: post.id}) }}" class="btn btn-lg btn-block btn-success">
+                <i class="fa fa-edit" aria-hidden="true"></i> Edit
+            </a>
+        </div>
 
-    <div class="section">
-        {{ include('admin/blog/_delete_form.html.twig', {post: post}, with_context = false) }}
-    </div>
+        <div class="section">
+            {{ include('admin/blog/_delete_form.html.twig', {post: post}, with_context = false) }}
+        </div>
+    {% endif %}
 
     {{ parent() }}
 {% endblock %}
