@@ -10,6 +10,7 @@
 
     <div class="jumbotron">
         <p class="mb-0"> Summary : {{ post.summary }}</p>
+        <img src="{{ vich_uploader_asset(post, 'imageFile') }}" alt="">
     </div>
 
     {{ post.content | markdown_to_html }}

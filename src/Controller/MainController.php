@@ -15,7 +15,7 @@ class MainController extends AbstractController
     #[Route('', name: 'index')]
     public function index(PostRepository $repository): Response
     {
-        $posts = $repository->findAll();
+        $posts = $repository->findBy([], ['published_at' => 'DESC']);
 
         return $this->render('main/index.html.twig', [
             'posts' => $posts

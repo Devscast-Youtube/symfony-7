@@ -9,6 +9,7 @@
 /vendor/
 .idea/
 .vscode/
+/public/images
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###

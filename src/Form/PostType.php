@@ -7,6 +7,7 @@ use App\Entity\Tag;
 use App\Entity\User;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,6 +28,9 @@ class PostType extends AbstractType
                 'required' => false
             ])
             ->add('content', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('imageFile', DropzoneType::class, [
                 'required' => false
             ])
         ;

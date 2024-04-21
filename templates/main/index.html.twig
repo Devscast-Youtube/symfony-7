@@ -9,14 +9,25 @@
 </style>
 
 <div class="example-wrapper">
-    {% for post in posts %}
-        <article>
-            <a href="{{ path('show', {id: post.id}) }}"><h1>{{ post.title | capitalize }}</h1></a>
-            <p>{{ post.summary }}</p>
-            <time>{{ post.publishedAt | date('d M Y') | lower }}</time>
-            <time>{{ date(post.publishedAt).format('d M Y')  }}</time>
-        </article> <br>
-    {% endfor %}
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-4">
+                <article>
+                    <div class="card" style="width: 18rem;">
+                        {% if post.imageName %}
+                            <img src="{{ vich_uploader_asset(post, 'imageFile') }}" class="card-img-top" alt="Cover {{ post.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <a class="card-title" href="{{ path('show', {id: post.id}) }}"><h1>{{ post.title | capitalize }}</h1></a>
+                            <p class="card-text">
+                                {{ post.summary }}
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
 
